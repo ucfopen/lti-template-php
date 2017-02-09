@@ -1,4 +1,5 @@
 <?php
-$consumer_key = ""
-$shared_secret = ""
+$consumer_key = "";
+$shared_secret = "";
+$launch_url = "";
 ?>
