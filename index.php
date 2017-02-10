@@ -37,8 +37,8 @@ if ($_SESSION['valid'] == false) {
         $_SESSION['valid'] = true;
 
         $render_params = [
-            "launch_params" => $_SESSION['launch_params'],
-            "msg" => "any msg here"
+            "user_id" => $_SESSION['launch_params']['custom_canvas_user_id'],
+            "course_id" => $_SESSION['launch_params']['custom_canvas_course_id']
         ];
         echo($templates->render('welcome', $render_params));
     }
