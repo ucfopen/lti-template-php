@@ -8,6 +8,7 @@
 // https://github.com/ucfopen/UDOIT/tree/master/lib/ims-blti
 //php -S localhost:8000
 require_once('settings.php');
+require 'vendor/autoload.php';
 // require_once('lib/utils.php');
 
 header('Content-Type: text/html; charset=utf-8');
@@ -28,20 +29,30 @@ if ($_SESSION['valid'] == false) {
     require_once('lib/ims-blti/blti.php');
     // Initialize, all secrets are 'secret', do not set session, and do not redirect
     $context = new BLTI($consumer_key, $shared_secret, false, false);
-    var_dump($_SERVER);
-    print "...";
-    // print $_SERVER['QUERY_STRING'];
+    $templates = new League\Plates\Engine('templates');
+
     if ( ! $context->valid) {
-        Utils::exitWithPageError('Authentication error');
+        // Authentication error
+        $other_msg = "other possible msg";
+        $render_params = [
+            'msg' => "An error occurred",
+            'other_thing' => $other_msg
+        ];
+        echo($templates->render('error', $render_params));
+    } else {
+
+        $_SESSION['launch_params']['custom_canvas_user_id'] = $post_input['custom_canvas_user_id'];
+        $_SESSION['launch_params']['custom_canvas_course_id'] = $post_input['custom_canvas_course_id'];
+        $_SESSION['launch_params']['context_label'] = $post_input['context_label'];
+        $_SESSION['launch_params']['context_title'] = $post_input['context_title'];
+        $_SESSION['valid'] = true;
+
+        $render_params = [
+            "launch_params" => $_SESSION['launch_params'],
+            "msg" => "any msg here"
+        ];
+        echo($templates->render('index', $render_params));
     }
-    $_SESSION['launch_params']['custom_canvas_user_id'] = $post_input['custom_canvas_user_id'];
-    $_SESSION['launch_params']['custom_canvas_course_id'] = $post_input['custom_canvas_course_id'];
-    $_SESSION['launch_params']['context_label'] = $post_input['context_label'];
-    $_SESSION['launch_params']['context_title'] = $post_input['context_title'];
-    $_SESSION['valid'] = true;
 }
 
-//create tool provider instance
-// $tool -> new ToolProvider/ToolProvider()
-print "welcome to the page";
 ?>

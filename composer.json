@@ -1,5 +1,5 @@
 {
     "require": {
-        "imsglobal/lti": "*"
+        "league/plates": "~3.1"
     }
 }
