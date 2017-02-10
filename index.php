@@ -1,24 +1,14 @@
 <?php
 
-// use IMSGlobal\LTI\ToolProvider;
-// use IMSGlobal\LTI\ToolProvider\DataConnector;
-
-// require_once 'vendor/autoload.php';
-
-// https://github.com/ucfopen/UDOIT/tree/master/lib/ims-blti
-//php -S localhost:8000
 require_once('settings.php');
 require 'vendor/autoload.php';
-// require_once('lib/utils.php');
 
 header('Content-Type: text/html; charset=utf-8');
 
 // Sanitize the post params! Pretty neat
-
 $post_input = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
 $post_input['custom_canvas_user_id'] = filter_input(INPUT_POST, 'custom_canvas_user_id', FILTER_SANITIZE_NUMBER_INT);
 $post_input['custom_canvas_course_id'] = filter_input(INPUT_POST, 'custom_canvas_course_id', FILTER_SANITIZE_NUMBER_INT);
-
 
 // set session to invalid ONLY when we need to verify the LTI oauth or an existing valid session doesn't exist
 if ( isset($post_input["oauth_consumer_key"]) || ! isset($_SESSION['valid'])) {
@@ -35,8 +25,7 @@ if ($_SESSION['valid'] == false) {
         // Authentication error
         $other_msg = "other possible msg";
         $render_params = [
-            'msg' => "An error occurred",
-            'other_thing' => $other_msg
+            'msg' => "An error occurred, please refresh and try again. If this error persists, please contact support."
         ];
         echo($templates->render('error', $render_params));
     } else {
@@ -51,7 +40,7 @@ if ($_SESSION['valid'] == false) {
             "launch_params" => $_SESSION['launch_params'],
             "msg" => "any msg here"
         ];
-        echo($templates->render('template', $render_params));
+        echo($templates->render('welcome', $render_params));
     }
 }
 
