@@ -51,7 +51,7 @@ if ($_SESSION['valid'] == false) {
             "launch_params" => $_SESSION['launch_params'],
             "msg" => "any msg here"
         ];
-        echo($templates->render('index', $render_params));
+        echo($templates->render('template', $render_params));
     }
 }
 
