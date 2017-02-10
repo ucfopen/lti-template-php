@@ -2,4 +2,6 @@
 $consumer_key = "";
 $shared_secret = "";
 $launch_url = "";
+$lti_name = "";
+$lti_desc = "";
 ?>

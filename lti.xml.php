@@ -1,3 +1,9 @@
+<?php 
+require_once('settings.php'); 
+header('Content-type: text/xml');
+echo('<?xml version="1.0" encoding="UTF-8"?>');
+?>
+
 <?xml version="1.0" encoding="UTF-8"?>
 <cartridge_basiclti_link xmlns="http://www.imsglobal.org/xsd/imslticc_v1p0"
     xmlns:blti = "http://www.imsglobal.org/xsd/imsbasiclti_v1p0"
@@ -8,16 +14,16 @@
     http://www.imsglobal.org/xsd/imsbasiclti_v1p0 http://www.imsglobal.org/xsd/lti/ltiv1p0/imsbasiclti_v1p0.xsd
     http://www.imsglobal.org/xsd/imslticm_v1p0 http://www.imsglobal.org/xsd/lti/ltiv1p0/imslticm_v1p0.xsd
     http://www.imsglobal.org/xsd/imslticp_v1p0 http://www.imsglobal.org/xsd/lti/ltiv1p0/imslticp_v1p0.xsd">
-    <blti:title>LTI Name</blti:title>
-    <blti:description>LTI Description</blti:description>
+    <blti:title><?= $lti_name ?></blti:title>
+    <blti:description><?= $lti_desc ?></blti:description>
     <blti:icon></blti:icon>
-    <blti:launch_url>http://localhost:8090/</blti:launch_url>
+    <blti:launch_url><?= $launch_url ?></blti:launch_url>
     <blti:extensions platform="canvas.instructure.com">
       <lticm:property name="tool_id">ID</lticm:property>
       <lticm:property name="privacy_level">public</lticm:property>
       <lticm:options name="course_navigation">
-        <lticm:property name="url">http://localhost:8090/</lticm:property>
-        <lticm:property name="text">php LTI Name (Shows up on course nav)</lticm:property>
+        <lticm:property name="url"><?= $launch_url ?></lticm:property>
+        <lticm:property name="text"><?= $lti_name ?></lticm:property>
         <lticm:property name="visibility">admins</lticm:property>
         <lticm:property name="default">enabled</lticm:property>
         <lticm:property name="enabled">true</lticm:property>
