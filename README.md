@@ -1,3 +1,5 @@
+[![Join UCF Open Slack Discussions](https://ucf-open-slackin.herokuapp.com/badge.svg)](https://ucf-open-slackin.herokuapp.com/)
+
 # PHP
 - This LTI template will not run locally! You need to set it up on a server.
     - You can use something like XAMPP https://www.apachefriends.org/index.html
