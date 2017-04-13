@@ -1,6 +1,7 @@
 <?php
 $consumer_key = "";
 $shared_secret = "";
+// $launch_url needs to include http or https
 $launch_url = "";
 $lti_name = "";
 $lti_desc = "";
